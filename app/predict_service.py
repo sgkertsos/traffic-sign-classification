@@ -10,7 +10,7 @@ from flask import jsonify
 
 # Variables
 # This is the mode file name
-model_file='./model/traffic_sign_classification.h5'
+model_file='./model/traffic_sign_classification_model.h5'
 
 # This is the dictionary in which the class descriptions are stored
 class_descriptions = {
