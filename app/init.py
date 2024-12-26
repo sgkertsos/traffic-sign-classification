@@ -60,6 +60,28 @@ def create_model(input_shape=(32, 32, 3), learning_rate=0.0):
 
     return model
 
+# This function resizes the images
+
+def resize_images(size=(32, 32)):
+    for i in range(classes):
+        input_directory = f"./data/train/{i}"
+        output_directory = f"./data/train-r/{i}"
+        
+        if not os.path.exists(output_directory):
+            os.makedirs(output_directory)
+    
+        for filename in os.listdir(input_directory):
+            input_path = os.path.join(input_directory, filename)
+            output_path = os.path.join(output_directory, filename)
+    
+            try:
+                with Image.open(input_path) as img:
+                    img = img.resize(size)
+                    img.save(output_path)
+                    print(f"Resized and saved: {output_path}")
+            except Exception as e:
+                print(f"Error processing {input_path}: {e}")
+
 # This function prepares the dataset
 
 def load_images():
@@ -89,6 +111,9 @@ def load_images():
 # This function trains the model
 
 def train_model():
+    # Resize images
+    resize_images(size=(32, 32))
+    
     # Prepare the dataset
     sign_images, sign_indexes = load_images()
 
@@ -103,7 +128,7 @@ def train_model():
     model = create_model(input_shape=(32, 32, 3), learning_rate=0.0)
 
     # Create a checkpoint to be used while training
-    checkpoint_filepath = 'checkpoints/traffic_sign_classification.keras'
+    checkpoint_filepath = './model/traffic_sign_classification_model.h5'
     
     checkpoint = keras.callbacks.ModelCheckpoint (
         checkpoint_filepath,
@@ -118,7 +143,7 @@ def train_model():
 
 def init():
     # Check if model file (traffic_sign_classification_model.bin) already exists
-    if os.path.exists('./model/traffic_sign_classification.h5'):
+    if os.path.exists('./model/traffic_sign_classification_model.h5'):
         print('Model file already exists. Exiting init function...')
         return
 
