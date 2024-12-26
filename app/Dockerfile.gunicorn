@@ -9,7 +9,7 @@ COPY init.py .
 COPY predict_service.py .
 
 RUN mkdir model
-COPY ./model/traffic_sign_classification_model.h5 ./model
+# COPY ./model/traffic_sign_classification_model.h5 ./model
 
 RUN mkdir data
 RUN mkdir ./data/train
