@@ -1,0 +1,18 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY requirements.gunicorn.txt .
+RUN pip install -r requirements.gunicorn.txt
+
+COPY init.py .
+COPY predict_service.py .
+
+RUN mkdir model
+COPY ./model/traffic_sign_classification.h5 ./model
+
+RUN python init.py
+
+EXPOSE 9696
+
+ENTRYPOINT [ "gunicorn", "--bind=0.0.0.0:9696", "predict_service:app" ]

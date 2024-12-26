@@ -1,0 +1,23 @@
+services:
+  predict_service:
+    build:
+      context: .
+      dockerfile: Dockerfile.gunicorn
+    container_name: predict_service
+    ports:
+      - "9696:9696"
+    volumes:
+      - gunicorn_data:/var/lib/gunicorn
+  
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    container_name: streamlit
+    ports:
+      - "8501:8501"
+    depends_on:
+      - predict_service
+
+volumes:
+  gunicorn_data:

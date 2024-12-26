@@ -1,0 +1,6 @@
+numpy==1.24.3
+scikit-learn==1.5.2
+flask==3.0.3
+gunicorn==23.0.0
+pillow==11.0.0
+tensorflow==2.14.0
