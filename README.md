@@ -111,10 +111,15 @@ unzip archive.zip
 
 There are two possibilities here:
 
-* Use the already trained model **(traffic_sign_classification_mode.h5)**
+* Use the already trained model **(traffic_sign_classification_mode.h5)**  
   In **Dockerfile.gunicorn** comment out the following lines:
 
-  ![image info](./images/comment_out_data.png)  
+  ![image info](./images/comment_out_data.png)
+  
+* Train the model again. The training may take some time.
+  In **Dockerfile.gunicorn** comment out the following line:
+  
+  ![image info](./images/comment_out_model.png)  
   
 Start the application by typing the following commands:
 
