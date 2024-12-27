@@ -90,7 +90,7 @@ https://docs.docker.com/compose/install/
 Open a terminal, navigate to a folder where you want the repository files to be stored and then type:  
 
 ```console
-https://github.com/sgkertsos/traffic-sign-classification.git
+git clone https://github.com/sgkertsos/traffic-sign-classification.git
 ```
 
 #### Download the dataset
@@ -115,12 +115,15 @@ There are two possibilities here:
   In **Dockerfile.gunicorn** comment out the following lines:
 
   ![image info](./images/comment_out_data.png)
+
+  **NOTE**
+  This is the selected method to run the application because it saves you time, training the model.
   
 * Train the model again. The training may take some time.
   In **Dockerfile.gunicorn** comment out the following line:
   
   ![image info](./images/comment_out_model.png)  
-  
+
 Start the application by typing the following commands:
 
 ```console
