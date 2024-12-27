@@ -32,7 +32,7 @@ Flask is the framework which we use to create the prediction web service.
 
 #### Streamlit
 ![image info](./images/streamlit.png)  
-Streamlit is used to create the user interface (UI). The user selects a traffic sign image file by using the **Browse** button or by just dragging the file and the output is displayed.
+Streamlit is used to create the user interface (UI). The user selects a traffic sign image file by using the **** button or by just dragging the file and the output is displayed.
 
 #### Docker
 ![image info](./images/docker.png)  
@@ -52,7 +52,7 @@ Below you can see the application flow diagram.
 
 ![image info](./images/app_flow_diagram.png)  
 
-The user opens a browser and accesses a simple form which is actually a streamlit app. All the user has to do is select the desired traffic sign image **(png/jpg)** by using the **Browse** button or by just dragging the file. The streamlit app uses a function from the **predict_service_functions.py** file to connect to the web service **(predict_service.py)**. The connection is made by using the **/predict_traffic_sign** endpoint. The **predict** function uses the model **(traffic_sign_classification_model.h5)** to predict a traffic sign class. The traffic sign class with a short description is then returned to the user and displayed below the image selection box. The **init.py** script runs when the application starts. You can read more about this script in the **Run the application** section.
+The user opens a r and accesses a simple form which is actually a streamlit app. All the user has to do is select the desired traffic sign image **(png/jpg)** by using the **Browse files** button or by just dragging the file. The streamlit app uses a function from the **predict_service_functions.py** file to connect to the web service **(predict_service.py)**. The connection is made by using the **/predict_traffic_sign** endpoint. The **predict** function uses the model **(traffic_sign_classification_model.h5)** to predict a traffic sign class. The traffic sign class with a short description is then returned to the user and displayed below the image selection box. The **init.py** script runs when the application starts. You can read more about this script in the **Run the application** section.
 
 ### Application structure
 
@@ -159,7 +159,7 @@ The application loads and you are presented with the traffic sign image selectio
 
 ![image info](./images/app.png)  
 
-Select a traffic sign image by clicking the **Browse** button or by just dragging the image on the gray area.  
+Select a traffic sign image by clicking the **Browse files** button or by just dragging the image on the gray area.  
 
 The traffic sign class index and description appear below the gray area.  
 
@@ -173,7 +173,7 @@ To start Jupyter Notebook make sure that you are in the **predict-house-price** 
 ```console
 jupyter notebook
 ```
-Copy the URL that is shown in your terminal and paste it in your preferred browser. The following picture appears. 
+Copy the URL that is shown in your terminal and paste it in your preferred r. The following picture appears. 
 
 ![image info](./images/jupyter.png)  
 
