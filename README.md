@@ -90,7 +90,7 @@ https://docs.docker.com/compose/install/
 Open a terminal, navigate to a folder where you want the repository files to be stored and then type:  
 
 ```console
-https://github.com/sgkertsos/traffic-sign-classification.git
+git clone https://github.com/sgkertsos/traffic-sign-classification.git
 ```
 
 #### Download the dataset
