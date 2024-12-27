@@ -137,13 +137,13 @@ After the application loading is done we have two docker containers running simu
 * Gunicorn on port 9696    
 * Streamlit on port 8501
 
-When the Gunicorn docker container starts for the first time, the **init.py** script runs. In this script the following happen:
+When the Gunicorn docker container starts for the first time, the **init.py** script runs. If you have selected the second option, to train the model again the following happen:
 
 * Images are loaded
-* Images are resized to 32x32 pixels and stored in the train-r folder.
-* Dataset is split into train and test data
+* Images are resized to 32x32 pixels and stored in the **app/data/train-r** folder.
+* Dataset is split into train and validation data
 * A model with specific parameters is trained. The specific model and the specific parameters were selected after model evaluation was performed by using the **notebook.ipynb** Jupyter Notebook file.
-* The model is saved under the filename **traffic_sign_classification_model.h5** in the **app/models** folder.
+* The model is saved under the filename **traffic_sign_classification_model.h5** in the **app/model** folder.
 
 This model is then loaded by the traffic sign classification web service to predict house prices. 
 
