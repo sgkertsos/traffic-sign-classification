@@ -201,7 +201,7 @@ Copy the container id and then type:
 ```console
 docker exec -it 68967bc26fc0 bash
 ```
-You are now in the **/app** folder and you are ready to interact with the application files. If for example you are in the Gunicorn/Flask container, you can take a look at the **test.csv** file mentioned earlier.
+You are now in the **/app** folder and you are ready to interact with the application files. If for example you are in the Gunicorn/Flask container, you can take a look at the **data** or **model** folders mentioned earlier.
 
 
 
