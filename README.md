@@ -43,7 +43,7 @@ We use docker to create the containers for our app. We actually have two contain
 We use the **scikit-learn** python library to handle data splitting.
 
 #### Tensorflow
-![image info](./images/tensorflow.png)  
+![image info](./images/tf.png)  
 We use the **tensorflow** library to perform the model training.
 
 ### Application flow
