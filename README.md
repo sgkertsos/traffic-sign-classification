@@ -155,13 +155,15 @@ Open your preferred browser and navigate to the following address:
 
 http://localhost:8501
 
-The application loads and you are presented with the house features form.
+The application loads and you are presented with the traffic sign image selection button.  
 
-![image info](./images/form_upper.png)  
-  
-![image info](./images/form_lower.png)  
+![image info](./images/app.png)  
 
-Fill in all the house features and the click on the **Calculate Price** button. The house price is displayed in the field below.
+Select a traffic sign image by clicking the **Browse** button or by just dragging the image on the gray area.  
+
+The traffic sign class index and description appear below the gray area.  
+
+![image info](./images/app_classification_made.png)  
 
 ### Run notebook.ipynb Jupyter Notebook
 If you want to check how the model evaluation was made, you can do it by opening the **notebook.ipynb** file in Jupyter Notebook and execute the code in each cell.
