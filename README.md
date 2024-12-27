@@ -145,7 +145,7 @@ When the Gunicorn docker container starts for the first time, the **init.py** sc
 * A model with specific parameters is trained. The specific model and the specific parameters were selected after model evaluation was performed by using the **notebook.ipynb** Jupyter Notebook file.
 * The model is saved under the filename **traffic_sign_classification_model.h5** in the **app/model** folder.
 
-This model is then loaded by the traffic sign classification web service to predict house prices. 
+This model is then loaded by the traffic sign classification web service to classify traffic signs. 
 
 **Note**  
 The script checks if the model file **(traffic_sign_classification_model.h5)** file exists. If the file exists, the script will not perform the initialization process again.
