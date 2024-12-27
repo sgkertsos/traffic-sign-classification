@@ -60,6 +60,7 @@ The following folders/files are included in the application:
 
 * **app** folder. This folder contains all the files needed for the application to run.
 * **data** folder. The application data file is stored here.
+* **model** folder. The trained model **(traffic_sign_classification_model.h5)** is stored here.
 * **docker-compose.yaml, Dockerfile.gunicorn** and **Dockerfile.streamlit** are used by docker to create the **UI** and **Predict Web Service** application containers.
 * **requirements.streamlit.txt**. All python libraries with their versions, used by the UI container are stored here.
 * **app.py**. This is the application entry point. It is the file that is loaded when the UI container starts.
@@ -107,10 +108,18 @@ unzip archive.zip
 ```
 
 #### Start the application
+
+There are two possibilities here:
+
+* Use the already trained model **(traffic_sign_classification_mode.h5)**
+  In **Dockerfile.gunicorn** comment out the following lines:
+
+  ![image info](./images/comment_out_data.png)  
+  
 Start the application by typing the following commands:
 
 ```console
-cd predict-house-price/app
+cd traffic-sign-classification/app
 docker compose up
 ```
 Wait for the application to load. 
@@ -122,17 +131,16 @@ After the application loading is done we have two docker containers running simu
 
 When the Gunicorn docker container starts for the first time, the **init.py** script runs. In this script the following happen:
 
-* Data is loaded
-* Data preparation is made
-* Data is split into train and test data
-* Test data is saved as **test.csv** in the **/app/data** folder so that you can have some examples to play with.
-* A Random Forest Regressor model with specific parameters is trained. The specific model and the specific parameters were selected after model evaluation was performed by using the **notebook.ipynb** Jupyter Notebook file.
-* The model is saved under the filename **model.bin**.
+* Images are loaded
+* Images are resized to 32x32 pixels and stored in the train-r folder.
+* Dataset is split into train and test data
+* A model with specific parameters is trained. The specific model and the specific parameters were selected after model evaluation was performed by using the **notebook.ipynb** Jupyter Notebook file.
+* The model is saved under the filename **traffic_sign_classification_model.h5** in the **app/models** folder.
 
-This model is then loaded by the house price predict web service to predict house prices. 
+This model is then loaded by the traffic sign classification web service to predict house prices. 
 
 **Note**  
-The script checks if the model file **(model.bin)** file exists. If the file exists, the script will not perform the initialization process again.
+The script checks if the model file **(traffic_sign_classification_model.h5)** file exists. If the file exists, the script will not perform the initialization process again.
 
 ### Access the user interface
 Open your preferred browser and navigate to the following address:
