@@ -168,31 +168,19 @@ The traffic sign class index and description appear below the gray area.
 ### Run notebook.ipynb Jupyter Notebook
 If you want to check how the model evaluation was made, you can do it by opening the **notebook.ipynb** file in Jupyter Notebook and execute the code in each cell.
 
-To start Jupyter Notebook make sure that you are in the **predict-house-price** folder and then type the following in your terminal:
+To start Jupyter Notebook make sure that you are in the **traffic-sign-classification** folder and then type the following in your terminal:
 
 ```console
 jupyter notebook
 ```
-Copy the URL that is shown in your terminal and paste it in your preferred r. The following picture appears. 
+Copy the URL that is shown in your terminal and paste it in your preferred browser. The following picture appears. 
 
 ![image info](./images/jupyter.png)  
 
 Double click on the **notebook.ipynb** file. The file is opened in a different tab. In this file we do the following:
 
-* We load, clean the data and check for missing values.
 * We perform Exploratory Data Analysis. 
-* We setup a validation framework.
-* We calculate feature importance.
-* We train and evaluate three different models:
-  * Linear Regression
-  * Decision Tree  
-    The model is evaluated for multiple **max_depth** values.  
-  * Random Forest  
-    The model is evaluated for multiple **max_depth** and **n_estimators** values.  
-    
-  RMSE is calculated for each model. The best RMSE is 0.065 for the Random Forest model.  
-
-* We can fill in house features and use the Random Forest model to make a price prediction.  
+* We train and evaluate different models.
 
 Each notebook cell has a short description of what is actually done.
 
