@@ -33,3 +33,22 @@ apt-get -y update; apt-get -y install curl
 # Install ping
 apt-get update -y
 apt-get install -y iputils-ping
+
+# Install AWS CLI
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+# Configure AWS CLI
+aws configure
+
+Provide:
+
+AWS Access Key ID
+AWS Secret Access Key
+Default region name
+Default output format
+
+# Create ECR repository
+aws ecr create-repository --repository-name model-serving
+
+It returns the following:
+<ACCOUNT>.dkr.ecr.<REGION>.amazonaws.com/model-serving
