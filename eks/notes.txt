@@ -80,7 +80,14 @@ kubectl describe service serving-gateway
 we see the value in the LoadBalancer Ingress line, eg
 a8890f67a9ca24353a8c8b53653d442e-140471327.us-east-1.elb.amazonaws.com
 
-# Change URL in test.py
+# Run the streamlit application
+Change URL in predict_service_functions.py
+
+and then in your terminal type:
+
+cd eks
+streamlit run app.py
+
 
 # Check deployments
 kubectl get deployments
@@ -90,3 +97,9 @@ kubectl get pods
 
 # Check services
 kubectl get services
+
+# Delete cluster
+eksctl version
+kubectl get svc --all-namespaces
+kubectl delete svc service-name
+eksctl delete cluster --name prod
