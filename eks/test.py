@@ -1,6 +1,6 @@
 from predict_service_functions import predict_traffic_sign
 
-image = '../app/data/test/00001.png'
+image = '../app/data/test/00002.png'
 
 response = predict_traffic_sign(image)
 

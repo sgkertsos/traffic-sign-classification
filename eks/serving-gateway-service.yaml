@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: serving-gateway
+spec:
+  type: LoadBalancer
+  selector:
+    app: serving-gateway
+  ports:
+  - port: 80
+    targetPort: 9696

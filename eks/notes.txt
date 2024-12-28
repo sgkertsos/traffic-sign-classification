@@ -1,15 +1,11 @@
-# Run tf serving model docker container
-docker run -it --rm \
--p 8500:8500 \
--v "./eks/model:/models/traffic_sign_classification_model/1" \
--e MODEL_NAME=traffic_sign_classification_model \
-tensorflow/serving:2.3.0
 
-# Install the necessary packages to communicate with tf service
-pip install grpcio==1.59.2 
-pip install tensorflow-serving-api==2.14.0
+# Install AWS CLI
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
-# Create network
+# Install kubectl and eksctl
+https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+
+# Create docker network
 docker network create test
 
 # Enter eks folder
@@ -27,16 +23,6 @@ docker run --network test -p 8500:8500 --name tf-serving-traffic-sign-classifica
 # Run gateway image locally
 docker run --network test -p 9696:9696 --name serving-gateway -t serving-gateway
 
-# Install curl
-apt-get -y update; apt-get -y install curl
-
-# Install ping
-apt-get update -y
-apt-get install -y iputils-ping
-
-# Install AWS CLI
-https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
-
 # Configure AWS CLI
 aws configure
 
@@ -52,3 +38,55 @@ aws ecr create-repository --repository-name model-serving
 
 It returns the following:
 <ACCOUNT>.dkr.ecr.<REGION>.amazonaws.com/model-serving
+
+# Authenticate with ECR
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com
+
+It must return
+Login Succeeded
+
+# Tag images
+docker tag serving-gateway <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:serving-gateway
+docker tag tf-serving-traffic-sign-classification-model <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:tf-serving-traffic-sign-classification-model
+
+# Push images
+docker push <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:serving-gateway
+docker push <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:tf-serving-traffic-sign-classification-model
+
+# Create kubernetes cluster
+eksctl create cluster -f cluster.yaml
+
+# Make kubectl access the newly created cluster
+aws eks --region <REGION> update-kubeconfig --name tsc-eks
+
+# Check status
+kubectl get service
+
+# Add tf-serving to kubernetes cluster
+kubectl apply -f tf-serving-traffic-sign-classification-deployment.yaml
+
+# Add tf-serving service to kubernetes cluster
+kubectl apply -f tf-serving-traffic-sign-classification-service.yaml
+
+# Add serving-gateway to kubernetes cluster
+kubectl apply -f serving-gateway-deployment.yaml
+
+# Add serving-gateway service to kubernetes cluster
+kubectl apply -f serving-gateway-service.yaml
+
+# Find service external URL
+kubectl describe service serving-gateway
+
+we see the value in the LoadBalancer Ingress line, eg
+a8890f67a9ca24353a8c8b53653d442e-140471327.us-east-1.elb.amazonaws.com
+
+# Change URL in test.py
+
+# Check deployments
+kubectl get deployments
+
+# Chek pods
+kubectl get pods
+
+# Check services
+kubectl get services

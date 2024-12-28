@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serving-gateway
+  labels: 
+    app: serving-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: serving-gateway
+  template:
+    metadata:
+      labels:
+        app: serving-gateway
+    spec:
+      containers:
+      - name: serving-gateway
+        image: <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:serving-gateway
+        ports:
+        - containerPort: 9696

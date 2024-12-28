@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tf-serving-traffic-sign-classification-model
+  labels: 
+    app: tf-serving-traffic-sign-classification-model
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tf-serving-traffic-sign-classification-model
+  template:
+    metadata:
+      labels:
+        app: tf-serving-traffic-sign-classification-model
+    spec:
+      containers:
+      - name: tf-serving-traffic-sign-classification-model
+        image: <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:tf-serving-traffic-sign-classification-model
+        ports:
+        - containerPort: 8500
