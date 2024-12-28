@@ -32,7 +32,7 @@ Flask is the framework which we use to create the prediction web service.
 
 #### Streamlit
 ![image info](./images/streamlit.png)  
-Streamlit is used to create the user interface (UI). The user selects a traffic sign image file by using the **Browse** button or by just dragging the file and the output is displayed.
+Streamlit is used to create the user interface (UI). The user selects a traffic sign image file by using the **** button or by just dragging the file and the output is displayed.
 
 #### Docker
 ![image info](./images/docker.png)  
@@ -52,7 +52,7 @@ Below you can see the application flow diagram.
 
 ![image info](./images/app_flow_diagram.png)  
 
-The user opens a browser and accesses a simple form which is actually a streamlit app. All the user has to do is select the desired traffic sign image **(png/jpg)** by using the **Browse** button or by just dragging the file. The streamlit app uses a function from the **predict_service_functions.py** file to connect to the web service **(predict_service.py)**. The connection is made by using the **/predict_traffic_sign** endpoint. The **predict** function uses the model **(traffic_sign_classification_model.h5)** to predict a traffic sign class. The traffic sign class with a short description is then returned to the user and displayed below the image selection box. The **init.py** script runs when the application starts. You can read more about this script in the **Run the application** section.
+The user opens a r and accesses a simple form which is actually a streamlit app. All the user has to do is select the desired traffic sign image **(png/jpg)** by using the **Browse files** button or by just dragging the file. The streamlit app uses a function from the **predict_service_functions.py** file to connect to the web service **(predict_service.py)**. The connection is made by using the **/predict_traffic_sign** endpoint. The **predict** function uses the model **(traffic_sign_classification_model.h5)** to predict a traffic sign class. The traffic sign class with a short description is then returned to the user and displayed below the image selection box. The **init.py** script runs when the application starts. You can read more about this script in the **Run the application** section.
 
 ### Application structure
 
@@ -137,15 +137,15 @@ After the application loading is done we have two docker containers running simu
 * Gunicorn on port 9696    
 * Streamlit on port 8501
 
-When the Gunicorn docker container starts for the first time, the **init.py** script runs. In this script the following happen:
+When the Gunicorn docker container starts for the first time, the **init.py** script runs. If you have selected the second option, to train the model again the following happen:
 
 * Images are loaded
-* Images are resized to 32x32 pixels and stored in the train-r folder.
-* Dataset is split into train and test data
+* Images are resized to 32x32 pixels and stored in the **app/data/train-r** folder.
+* Dataset is split into train and validation data
 * A model with specific parameters is trained. The specific model and the specific parameters were selected after model evaluation was performed by using the **notebook.ipynb** Jupyter Notebook file.
-* The model is saved under the filename **traffic_sign_classification_model.h5** in the **app/models** folder.
+* The model is saved under the filename **traffic_sign_classification_model.h5** in the **app/model** folder.
 
-This model is then loaded by the traffic sign classification web service to predict house prices. 
+This model is then loaded by the traffic sign classification web service to classify traffic signs. 
 
 **Note**  
 The script checks if the model file **(traffic_sign_classification_model.h5)** file exists. If the file exists, the script will not perform the initialization process again.
@@ -155,18 +155,20 @@ Open your preferred browser and navigate to the following address:
 
 http://localhost:8501
 
-The application loads and you are presented with the house features form.
+The application loads and you are presented with the traffic sign image selection button.  
 
-![image info](./images/form_upper.png)  
-  
-![image info](./images/form_lower.png)  
+![image info](./images/app.png)  
 
-Fill in all the house features and the click on the **Calculate Price** button. The house price is displayed in the field below.
+Select a traffic sign image by clicking the **Browse files** button or by just dragging the image on the gray area.  
+
+The traffic sign class index and description appear below the gray area.  
+
+![image info](./images/app_classification_made.png)  
 
 ### Run notebook.ipynb Jupyter Notebook
 If you want to check how the model evaluation was made, you can do it by opening the **notebook.ipynb** file in Jupyter Notebook and execute the code in each cell.
 
-To start Jupyter Notebook make sure that you are in the **predict-house-price** folder and then type the following in your terminal:
+To start Jupyter Notebook make sure that you are in the **traffic-sign-classification** folder and then type the following in your terminal:
 
 ```console
 jupyter notebook
@@ -177,20 +179,8 @@ Copy the URL that is shown in your terminal and paste it in your preferred brows
 
 Double click on the **notebook.ipynb** file. The file is opened in a different tab. In this file we do the following:
 
-* We load, clean the data and check for missing values.
 * We perform Exploratory Data Analysis. 
-* We setup a validation framework.
-* We calculate feature importance.
-* We train and evaluate three different models:
-  * Linear Regression
-  * Decision Tree  
-    The model is evaluated for multiple **max_depth** values.  
-  * Random Forest  
-    The model is evaluated for multiple **max_depth** and **n_estimators** values.  
-    
-  RMSE is calculated for each model. The best RMSE is 0.065 for the Random Forest model.  
-
-* We can fill in house features and use the Random Forest model to make a price prediction.  
+* We train and evaluate different models.
 
 Each notebook cell has a short description of what is actually done.
 
@@ -211,7 +201,7 @@ Copy the container id and then type:
 ```console
 docker exec -it 68967bc26fc0 bash
 ```
-You are now in the **/app** folder and you are ready to interact with the application files. If for example you are in the Gunicorn/Flask container, you can take a look at the **test.csv** file mentioned earlier.
+You are now in the **/app** folder and you are ready to interact with the application files. If for example you are in the Gunicorn/Flask container, you can take a look at the **data** or **model** folders mentioned earlier.
 
 
 
