@@ -1,0 +1,5 @@
+FROM tensorflow/serving:2.3.0
+
+ENV MODEL_NAME=traffic_sign_classification_model
+
+COPY model /models/traffic_sign_classification_model/1

@@ -1,0 +1,12 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY requirements.gateway.txt .
+RUN pip install -r requirements.gateway.txt
+
+COPY gateway.py .
+
+EXPOSE 9696
+
+ENTRYPOINT [ "gunicorn", "--bind=0.0.0.0:9696", "gateway:app" ]

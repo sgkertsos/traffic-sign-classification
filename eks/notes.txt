@@ -1,0 +1,35 @@
+# Run tf serving model docker container
+docker run -it --rm \
+-p 8500:8500 \
+-v "./eks/model:/models/traffic_sign_classification_model/1" \
+-e MODEL_NAME=traffic_sign_classification_model \
+tensorflow/serving:2.3.0
+
+# Install the necessary packages to communicate with tf service
+pip install grpcio==1.59.2 
+pip install tensorflow-serving-api==2.14.0
+
+# Create network
+docker network create test
+
+# Enter eks folder
+cd eks
+
+# Build TF serving image
+docker build -t tf-serving-traffic-sign-classification-model -f Dockerfile.tfserving .
+
+# Build gateway image
+docker build -t serving-gateway -f Dockerfile.gateway .
+
+# Run TF serving image locally
+docker run --network test -p 8500:8500 --name tf-serving-traffic-sign-classification-model -t tf-serving-traffic-sign-classification-model
+
+# Run gateway image locally
+docker run --network test -p 9696:9696 --name serving-gateway -t serving-gateway
+
+# Install curl
+apt-get -y update; apt-get -y install curl
+
+# Install ping
+apt-get update -y
+apt-get install -y iputils-ping
