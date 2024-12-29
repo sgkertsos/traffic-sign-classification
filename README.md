@@ -184,6 +184,25 @@ Double click on the **notebook.ipynb** file. The file is opened in a different t
 
 Each notebook cell has a short description of what is actually done.
 
+### AWS Elastic Kubernetes Service
+A Kubernetes cluster with this traffic sign classification service runs on AWS. You can access it by doing the following:
+
+* Open a terminal and navigate to the **eks** folder. Then type:
+ ```console
+docker build -t streamlit_eks -f Dockerfile.streamlit .
+```
+to build the streamlit app, the eks version.
+* After the image is built you can run it by typing:
+  ```console
+docker run -p 8501:8501 --name streamlit_eks -t streamlit_eks
+```
+* Finally open your preferred browser and type the following:
+  ```console
+http://localhost:8501
+```
+So now you can upload images to the traffic sign classification service to get a classification as you did with the local version.  
+But now the classification takes place on the EKS cluster.
+
 ### Notes
 
 #### Access docker container terminal
