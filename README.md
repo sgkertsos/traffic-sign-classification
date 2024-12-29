@@ -249,14 +249,14 @@ docker build -t serving-gateway -f Dockerfile.gateway .
 aws ecr create-repository --repository-name model-serving
 ```
 
-It returns the following:
-<ACCOUNT>.dkr.ecr.<REGION>.amazonaws.com/model-serving
+It returns the following:  
+**ACCOUNT**.dkr.ecr.**REGION**.amazonaws.com/model-serving
 
 Where **ACCOUNT** is your ACCOUNT ID and **REGION** is your region.
 
-**In the instructions that follow you have to replace the <ACCOUNT ID> and the <REGION> with those two values.**
+**In the instructions that follow you have to replace the ACCOUNT ID and the <REGION> with those two values.**
 
-* Authenticate with ECR. Type:
+* Authenticate with ECR. Type:  
 ```console
 aws ecr get-login-password --region <REGION> | docker login --username AWS --password-stdin <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com
 ```
