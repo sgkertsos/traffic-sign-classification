@@ -193,11 +193,11 @@ docker build -t streamlit_eks -f Dockerfile.streamlit .
 ```
 to build the streamlit app, the eks version.
 * After the image is built you can run it by typing:
-  ```console
+```console
 docker run -p 8501:8501 --name streamlit_eks -t streamlit_eks
 ```
 * Finally open your preferred browser and type the following:
-  ```console
+```console
 http://localhost:8501
 ```
 So now you can upload images to the traffic sign classification service to get a classification as you did with the local version.  
