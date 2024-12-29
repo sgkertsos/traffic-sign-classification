@@ -80,14 +80,11 @@ kubectl describe service serving-gateway
 we see the value in the LoadBalancer Ingress line, eg
 a8890f67a9ca24353a8c8b53653d442e-140471327.us-east-1.elb.amazonaws.com
 
-# Run the streamlit application
-Change URL in predict_service_functions.py
+# Build streamlit app image
+docker build -t streamlit_eks -f Dockerfile.streamlit .
 
-and then in your terminal type:
-
-cd eks
-streamlit run app.py
-
+# Run streamlit app
+docker run -p 8501:8501 --name streamlit_eks -t streamlit_eks
 
 # Check deployments
 kubectl get deployments

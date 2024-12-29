@@ -1,0 +1,2 @@
+streamlit==1.38.0
+numpy==1.24.3
