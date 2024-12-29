@@ -200,9 +200,126 @@ docker run -p 8501:8501 --name streamlit_eks -t streamlit_eks
 ```console
 http://localhost:8501
 ```
-So now you can upload images to the traffic sign classification service to get a classification as you did with the local version.  
+So now you can upload images to the traffic sign classification service to get a classification as you did with the local version.
 But now the classification takes place on the EKS cluster.
 
+### Build your own AWS EKS cluster for the traffic sign classification service
+In this section we will show you how you can build your own AWS EKS cluster with the
+traffic sign classification service.
+
+#### Prerequisities
+
+* An AWS account
+
+* Install AWS CLI
+You can see how to install AWS CLI in the following link:  
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html  
+
+* Install kubectl and eksctl
+You can see how to install kubectl and eksctl in the following link
+https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+
+Open your terminal and access the **eks** folder.
+
+Then:
+* To configure **AWS CLI** type:
+```console
+aws configure
+```
+Provide:
+
+AWS Access Key ID
+AWS Secret Access Key
+Default region name
+Default output format
+
+* Build the **TF serving** image. Type:
+```console
+docker build -t tf-serving-traffic-sign-classification-model -f Dockerfile.tfserving .
+```
+
+* Build the **gateway** image. Type:
+```console
+docker build -t serving-gateway -f Dockerfile.gateway .
+```
+
+* Create an **ECR repository**. Type:
+```console
+aws ecr create-repository --repository-name model-serving
+```
+
+It returns the following:
+<ACCOUNT>.dkr.ecr.<REGION>.amazonaws.com/model-serving
+
+Where **ACCOUNT** is your ACCOUNT ID and **REGION** is your region.
+
+**In the instructions that follow you have to replace the <ACCOUNT ID> and the <REGION> with those two values.**
+
+* Authenticate with ECR. Type:
+```console
+aws ecr get-login-password --region <REGION> | docker login --username AWS --password-stdin <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com
+```
+It must return
+Login Succeeded
+
+* Tag images. Type:
+```console
+docker tag serving-gateway <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:serving-gateway
+docker tag tf-serving-traffic-sign-classification-model <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:tf-serving-traffic-sign-classification-model
+```
+* Push images to ECR. Type:
+```console
+docker push <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:serving-gateway
+docker push <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:tf-serving-traffic-sign-classification-model
+```
+
+# Create kubernetes cluster
+eksctl create cluster -f cluster.yaml
+
+# Make kubectl access the newly created cluster
+aws eks --region <REGION> update-kubeconfig --name tsc-eks
+
+# Check status
+kubectl get service
+
+# Add tf-serving to kubernetes cluster
+kubectl apply -f tf-serving-traffic-sign-classification-deployment.yaml
+
+# Add tf-serving service to kubernetes cluster
+kubectl apply -f tf-serving-traffic-sign-classification-service.yaml
+
+# Add serving-gateway to kubernetes cluster
+kubectl apply -f serving-gateway-deployment.yaml
+
+# Add serving-gateway service to kubernetes cluster
+kubectl apply -f serving-gateway-service.yaml
+
+# Find service external URL
+kubectl describe service serving-gateway
+
+we see the value in the LoadBalancer Ingress line, eg
+a8890f67a9ca24353a8c8b53653d442e-140471327.us-east-1.elb.amazonaws.com
+
+# Build streamlit app image
+docker build -t streamlit_eks -f Dockerfile.streamlit .
+
+# Run streamlit app
+docker run -p 8501:8501 --name streamlit_eks -t streamlit_eks
+
+# Check deployments
+kubectl get deployments
+
+# Chek pods
+kubectl get pods
+
+# Check services
+kubectl get services
+
+# Delete cluster
+eksctl version
+kubectl get svc --all-namespaces
+kubectl delete svc service-name
+eksctl delete cluster --name prod
 ### Notes
 
 #### Access docker container terminal
