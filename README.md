@@ -59,17 +59,17 @@ The user opens a r and accesses a simple form which is actually a streamlit app.
 The following folders/files are included in the application:
 
 * **app** folder. This folder contains all the files needed for the application to run.
-* **data** folder. The application data file is stored here.
-* **model** folder. The trained model **(traffic_sign_classification_model.h5)** is stored here.
-* **docker-compose.yaml, Dockerfile.gunicorn** and **Dockerfile.streamlit** are used by docker to create the **UI** and **Predict Web Service** application containers.
-* **requirements.streamlit.txt**. All python libraries with their versions, used by the UI container are stored here.
-* **app.py**. This is the application entry point. It is the file that is loaded when the UI container starts.
-* **predict_service_functions.py** This file contains the necessary functions to connect to the traffic sign classification web service.
-* **requirements.gunicorn.txt**. All python libraries with their versions, used by the predict service container are stored here.
-* **init.py**. This file is used to perform data preparation, to split the data into train and validation datasets, to train and finally save the model.
-* **predict_service.py** This is the traffic sign classification web service. This service receives a traffic sign image in png/jpg format and returns a predicted traffic sign class.
-* **notebook.ipynb** This is a Jupyter notebook file which was used for Exploratory Data Analysys and also for model evaluation and model final selection. After the best model is selected, this model is then used in the application.
-* **README.md**. This file.
+** **data** folder. The application data will be stored here.
+** **model** folder. The trained model **(traffic_sign_classification_model.h5)** is stored here.
+** **docker-compose.yaml, Dockerfile.gunicorn** and **Dockerfile.streamlit** are used by docker to create the **UI** and **Predict Web Service** application containers.
+** **requirements.streamlit.txt**. All python libraries with their versions, used by the UI container are stored here.
+** **app.py**. This is the application entry point. It is the file that is loaded when the UI container starts.
+** **predict_service_functions.py** This file contains the necessary functions to connect to the traffic sign classification web service.
+** **requirements.gunicorn.txt**. All python libraries with their versions, used by the predict service container are stored here.
+** **init.py**. This file is used to perform data preparation, to split the data into train and validation datasets, to train and finally save the model.
+** **predict_service.py** This is the traffic sign classification web service. This service receives a traffic sign image in png/jpg format and returns a predicted traffic sign class.
+** **notebook.ipynb** This is a Jupyter notebook file which was used for Exploratory Data Analysys and also for model evaluation and model final selection. After the best model is selected, this model is then used in the application.
+** **README.md**. This file.
 
 ### Install Jupyter Notebook and Docker
 
