@@ -59,16 +59,26 @@ The user opens a r and accesses a simple form which is actually a streamlit app.
 The following folders/files are included in the application:
 
 * **app** folder. This folder contains all the files needed for the application to run.
-* **data** folder. The application data file is stored here.
-* **model** folder. The trained model **(traffic_sign_classification_model.h5)** is stored here.
-* **docker-compose.yaml, Dockerfile.gunicorn** and **Dockerfile.streamlit** are used by docker to create the **UI** and **Predict Web Service** application containers.
-* **requirements.streamlit.txt**. All python libraries with their versions, used by the UI container are stored here.
-* **app.py**. This is the application entry point. It is the file that is loaded when the UI container starts.
-* **predict_service_functions.py** This file contains the necessary functions to connect to the traffic sign classification web service.
-* **requirements.gunicorn.txt**. All python libraries with their versions, used by the predict service container are stored here.
-* **init.py**. This file is used to perform data preparation, to split the data into train and validation datasets, to train and finally save the model.
-* **predict_service.py** This is the traffic sign classification web service. This service receives a traffic sign image in png/jpg format and returns a predicted traffic sign class.
-* **notebook.ipynb** This is a Jupyter notebook file which was used for Exploratory Data Analysys and also for model evaluation and model final selection. After the best model is selected, this model is then used in the application.
+  * **data** folder. The application data will be stored here.
+  * **model** folder. The trained model **(traffic_sign_classification_model.h5)** is stored here.
+  * **docker-compose.yaml, Dockerfile.gunicorn** and **Dockerfile.streamlit** are used by docker to create the **UI** and **Classification Web Service** application containers.
+  * **requirements.streamlit.txt**. All python libraries with their versions, used by the UI container are stored here.
+  * **app.py**. This is the application entry point. It is the file that is loaded when the UI container starts.
+  * **predict_service_functions.py** This file contains the necessary functions to connect to the traffic sign classification web service.
+  * **requirements.gunicorn.txt**. All python libraries with their versions, used by the classification service container are stored here.
+  * **init.py**. This file is used to perform data preparation, to split the data into train and validation datasets, to train and finally save the model.
+  * **predict_service.py** This is the traffic sign classification web service. This service receives a traffic sign image in png/jpg format and returns a predicted traffic sign class.
+* **eks** folder. This folder contains all the files needed for the application to run on **AWS EKS**.
+  * **model** folder. The converted model **(saved_model)** is stored here.
+  * **Dockerfile.gateway**, **Dockerfile.tfserving** and **Dockerfile.streamlit** are used by docker to create the **Gateway**, **Classification Web Service** and **UI** application containers.
+  * **requirements.streamlit.txt**. All python libraries with their versions, used by the UI container are stored here.
+  * **app.py**. This is the application entry point. It is the file that is loaded when the UI container starts.
+  * **predict_service_functions.py**. This file contains the necessary functions to connect to the traffic sign classification web service.
+  * **requirements.gateway.txt**. All python libraries with their versions, used by the classification service container are stored here.
+  * **gateway.py**. This is the traffic sign classification web service. This service receives a traffic sign image in png/jpg format and returns a predicted traffic sign class.
+  * **.yaml** files. Thos files are used by the kubectl utiltiy to create the kubernetes cluster components.
+* **convert_model.ipynb**. This file is used to convert the **.h5** format model to the **saved_model** format.
+* **notebook.ipynb** This is a Jupyter notebook file which was used for Exploratory Data Analysis. Also in this file the model used in the app was created and tested. Model creation is also performed in the **init.py** file mentioned earlier.
 * **README.md**. This file.
 
 ### Install Jupyter Notebook and Docker
@@ -166,7 +176,7 @@ The traffic sign class index and description appear below the gray area.
 ![image info](./images/app_classification_made.png)  
 
 ### Run notebook.ipynb Jupyter Notebook
-If you want to check how the model evaluation was made, you can do it by opening the **notebook.ipynb** file in Jupyter Notebook and execute the code in each cell.
+If you want to check how the model was created and tested, you can do it by opening the **notebook.ipynb** file in Jupyter Notebook and execute the code in each cell.
 
 To start Jupyter Notebook make sure that you are in the **traffic-sign-classification** folder and then type the following in your terminal:
 
@@ -180,9 +190,160 @@ Copy the URL that is shown in your terminal and paste it in your preferred brows
 Double click on the **notebook.ipynb** file. The file is opened in a different tab. In this file we do the following:
 
 * We perform Exploratory Data Analysis. 
-* We train and evaluate different models.
+* We create and test a model.
 
 Each notebook cell has a short description of what is actually done.
+
+### AWS Elastic Kubernetes Service
+A Kubernetes cluster with this traffic sign classification service runs on AWS. You can access it by doing the following:
+
+* Open a terminal and navigate to the **eks** folder. Then type:
+ ```console
+docker build -t streamlit_eks -f Dockerfile.streamlit .
+```
+to build the streamlit app, the eks version.
+* After the image is built you can run it by typing:
+```console
+docker run -p 8501:8501 --name streamlit_eks -t streamlit_eks
+```
+* Finally open your preferred browser and type the following:
+```console
+http://localhost:8501
+```
+So now you can upload images to the traffic sign classification service to get a classification as you did with the local version.
+But now the classification takes place on the EKS cluster.
+
+### Build your own AWS EKS cluster for the traffic sign classification service
+In this section we will show you how you can build your own AWS EKS cluster with the
+traffic sign classification service.
+
+#### Prerequisities
+
+* An AWS account
+
+* Install AWS CLI
+You can see how to install AWS CLI in the following link:  
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html  
+
+* Install kubectl and eksctl
+You can see how to install kubectl and eksctl in the following link
+https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+
+Open your terminal and access the **eks** folder.
+
+Follow the next steps one by one:  
+
+* Configure **AWS CLI**. Type:
+```console
+aws configure
+```
+Provide:  
+
+AWS Access Key ID  
+AWS Secret Access Key  
+Default region name  
+Default output format  
+
+* Build the **TF serving** image. Type:
+```console
+docker build -t tf-serving-traffic-sign-classification-model -f Dockerfile.tfserving .
+```
+
+* Build the **gateway** image. Type:
+```console
+docker build -t serving-gateway -f Dockerfile.gateway .
+```
+
+* Create an **ECR repository**. Type:
+```console
+aws ecr create-repository --repository-name model-serving
+```
+
+It returns the following:  
+**ACCOUNT**.dkr.ecr.**REGION**.amazonaws.com/model-serving
+
+Where **ACCOUNT** is your ACCOUNT ID and **REGION** is your region.
+
+**In the instructions that follow you have to replace the ACCOUNT ID and the REGION with those two values.**
+
+* Authenticate with ECR. Type:  
+```console
+aws ecr get-login-password --region <REGION> | docker login --username AWS --password-stdin <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com
+```
+It must return  
+Login Succeeded
+
+* Tag images. Type:
+```console
+docker tag serving-gateway <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:serving-gateway
+docker tag tf-serving-traffic-sign-classification-model <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:tf-serving-traffic-sign-classification-model
+```
+
+* Push images to ECR. Type:
+```console
+docker push <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:serving-gateway
+docker push <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:tf-serving-traffic-sign-classification-model
+```
+
+* Create kubernetes cluster. Type:
+```console
+eksctl create cluster -f cluster.yaml
+```
+
+* Make kubectl access the newly created cluster. Type:
+```console
+aws eks --region <REGION> update-kubeconfig --name tsc-eks
+```
+
+* Add **tf-serving** container to kubernetes cluster. Type:
+```console
+kubectl apply -f tf-serving-traffic-sign-classification-deployment.yaml
+```
+
+* Add **tf-serving** service to kubernetes cluster. Type:
+```console
+kubectl apply -f tf-serving-traffic-sign-classification-service.yaml
+```
+
+* Add **serving-gateway** to kubernetes cluster. Type:
+```console
+kubectl apply -f serving-gateway-deployment.yaml
+```
+
+* Add **serving-gateway** service to kubernetes cluster. Type:
+```console
+kubectl apply -f serving-gateway-service.yaml
+```
+
+* Find service external URL. Type:
+```console
+kubectl describe service serving-gateway
+```
+we see the value in the LoadBalancer Ingress line, eg  
+a8890f67a9ca24353a8c8b53653d442e-140471327.us-east-1.elb.amazonaws.com
+
+The kubernetes cluster is created. You can check it by typing the following commands:  
+
+ * Check deployments. Type:
+```console
+kubectl get deployments
+```
+
+* Check pods. Type:
+```console
+kubectl get pods
+```
+
+* Check services. Type:
+```console
+kubectl get services
+```
+
+**The newly created kubernetes cluster cannot be used for free and it is charged. So if you want to delete it you can type the following:**  
+
+```console
+eksctl delete cluster --name tsc-eks
+```
 
 ### Notes
 
@@ -201,7 +362,7 @@ Copy the container id and then type:
 ```console
 docker exec -it 68967bc26fc0 bash
 ```
-You are now in the **/app** folder and you are ready to interact with the application files. If for example you are in the Gunicorn/Flask container, you can take a look at the **data** or **model** folders mentioned earlier.
+You are now in the **/app** folder and you are ready to interact with the application files. If for example you are in the Gunicorn/Flask container, you can take a look at the **data** or **model** folders mentioned earlier, but you could also experiment with the communication between the containers by using such commands as **curl** and **ping**.  
 
 
 
