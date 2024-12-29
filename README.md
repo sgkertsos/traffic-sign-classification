@@ -221,17 +221,18 @@ https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
 
 Open your terminal and access the **eks** folder.
 
-Then:
-* To configure **AWS CLI** type:
+Follow the next steps one by one:  
+
+* Configure **AWS CLI**. Type:
 ```console
 aws configure
 ```
-Provide:
+Provide:  
 
-AWS Access Key ID
-AWS Secret Access Key
-Default region name
-Default output format
+AWS Access Key ID  
+AWS Secret Access Key  
+Default region name  
+Default output format  
 
 * Build the **TF serving** image. Type:
 ```console
