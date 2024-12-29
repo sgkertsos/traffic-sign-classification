@@ -254,13 +254,13 @@ It returns the following:
 
 Where **ACCOUNT** is your ACCOUNT ID and **REGION** is your region.
 
-**In the instructions that follow you have to replace the ACCOUNT ID and the <REGION> with those two values.**
+**In the instructions that follow you have to replace the ACCOUNT ID and the REGION with those two values.**
 
 * Authenticate with ECR. Type:  
 ```console
 aws ecr get-login-password --region <REGION> | docker login --username AWS --password-stdin <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com
 ```
-It must return
+It must return  
 Login Succeeded
 
 * Tag images. Type:
@@ -268,59 +268,73 @@ Login Succeeded
 docker tag serving-gateway <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:serving-gateway
 docker tag tf-serving-traffic-sign-classification-model <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:tf-serving-traffic-sign-classification-model
 ```
+
 * Push images to ECR. Type:
 ```console
 docker push <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:serving-gateway
 docker push <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:tf-serving-traffic-sign-classification-model
 ```
 
-# Create kubernetes cluster
+* Create kubernetes cluster. Type:
+```console
 eksctl create cluster -f cluster.yaml
+```
 
-# Make kubectl access the newly created cluster
+* Make kubectl access the newly created cluster. Type:
+```console
 aws eks --region <REGION> update-kubeconfig --name tsc-eks
+```
 
-# Check status
-kubectl get service
-
-# Add tf-serving to kubernetes cluster
+* Add **tf-serving** container to kubernetes cluster. Type:
+```console
 kubectl apply -f tf-serving-traffic-sign-classification-deployment.yaml
+```
 
-# Add tf-serving service to kubernetes cluster
+* Add **tf-serving** service to kubernetes cluster. Type:
+```console
 kubectl apply -f tf-serving-traffic-sign-classification-service.yaml
+```
 
-# Add serving-gateway to kubernetes cluster
+* Add **serving-gateway** to kubernetes cluster. Type:
+```console
 kubectl apply -f serving-gateway-deployment.yaml
+```
 
-# Add serving-gateway service to kubernetes cluster
+* Add **serving-gateway** service to kubernetes cluster. Type:
+```console
 kubectl apply -f serving-gateway-service.yaml
+```
 
-# Find service external URL
+* Find service external URL. Type:
+```console
 kubectl describe service serving-gateway
-
-we see the value in the LoadBalancer Ingress line, eg
+```
+we see the value in the LoadBalancer Ingress line, eg  
 a8890f67a9ca24353a8c8b53653d442e-140471327.us-east-1.elb.amazonaws.com
 
-# Build streamlit app image
-docker build -t streamlit_eks -f Dockerfile.streamlit .
+The kubernetes cluster is created. You can check it by typing the following commands:  
 
-# Run streamlit app
-docker run -p 8501:8501 --name streamlit_eks -t streamlit_eks
-
-# Check deployments
+ * Check deployments. Type:
+```console
 kubectl get deployments
+```
 
-# Chek pods
+* Check pods. Type:
+```console
 kubectl get pods
+```
 
-# Check services
+* Check services. Type:
+```console
 kubectl get services
+```
 
-# Delete cluster
-eksctl version
-kubectl get svc --all-namespaces
-kubectl delete svc service-name
-eksctl delete cluster --name prod
+**The newly created kubernetes cluster cannot be used for free and it is charged. So if you want to delete it you can type the following:**  
+
+```console
+eksctl delete cluster --name tsc-eks
+```
+
 ### Notes
 
 #### Access docker container terminal
@@ -338,7 +352,7 @@ Copy the container id and then type:
 ```console
 docker exec -it 68967bc26fc0 bash
 ```
-You are now in the **/app** folder and you are ready to interact with the application files. If for example you are in the Gunicorn/Flask container, you can take a look at the **data** or **model** folders mentioned earlier.
+You are now in the **/app** folder and you are ready to interact with the application files. If for example you are in the Gunicorn/Flask container, you can take a look at the **data** or **model** folders mentioned earlier, but you could also experiment with the communication between the containers by using such commands as **curl** and **ping**.  
 
 
 
