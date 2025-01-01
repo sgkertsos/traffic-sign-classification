@@ -342,7 +342,7 @@ kubectl get services
 **The newly created kubernetes cluster cannot be used for free and it is charged. So if you want to delete it you can type the following:**  
 
 ```console
-eksctl delete cluster --name tsc-eks
+eksctl delete cluster --name tsc-eks --disable-nodegroup-eviction
 ```
 
 ### Notes
