@@ -277,7 +277,8 @@ Where **ACCOUNT** is your ACCOUNT ID and **REGION** is your region.
 ```console
 aws ecr get-login-password --region <REGION> | docker login --username AWS --password-stdin <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com
 ```
-It must return  
+It must return:  
+
 Login Succeeded
 
 * Tag images. Type:
