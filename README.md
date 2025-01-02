@@ -303,7 +303,9 @@ eksctl create cluster -f cluster.yaml
 aws eks --region <REGION> update-kubeconfig --name tsc-eks
 ```
 
-* Add **tf-serving** container to kubernetes cluster. Type:
+* Add **tf-serving** container to kubernetes cluster.  
+  Change **ACCOUNT ID** and **REGION** in the **tf-serving-traffic-sign-classification-deployment.yaml**. Then type:  
+  
 ```console
 kubectl apply -f tf-serving-traffic-sign-classification-deployment.yaml
 ```
@@ -313,7 +315,9 @@ kubectl apply -f tf-serving-traffic-sign-classification-deployment.yaml
 kubectl apply -f tf-serving-traffic-sign-classification-service.yaml
 ```
 
-* Add **serving-gateway** container to kubernetes cluster. Type:
+* Add **serving-gateway** container to kubernetes cluster.  
+  Change **ACCOUNT ID** and **REGION** in the **serving-gateway-deployment.yaml**. Then type:
+  
 ```console
 kubectl apply -f serving-gateway-deployment.yaml
 ```
