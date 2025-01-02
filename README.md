@@ -265,10 +265,11 @@ docker build -t serving-gateway -f Dockerfile.gateway .
 aws ecr create-repository --repository-name model-serving
 ```
 
-It returns the following:  
-**ACCOUNT**.dkr.ecr.**REGION**.amazonaws.com/model-serving
+It returns the following URI:  
 
-Where **ACCOUNT** is your ACCOUNT ID and **REGION** is your region.
+**ACCOUNT**.dkr.ecr.**REGION**.amazonaws.com/model-serving  
+
+Where **ACCOUNT** is your ACCOUNT ID and **REGION** is your region.  
 
 **In the instructions that follow you have to replace the ACCOUNT ID and the REGION with those two values.**
 
