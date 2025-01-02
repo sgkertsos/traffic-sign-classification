@@ -108,11 +108,13 @@ git clone https://github.com/sgkertsos/traffic-sign-classification.git
 ```
 
 #### Download the dataset
-Download the **archive.zip** file from the link below:
+Navigate to the link below:
 
 https://www.kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign
 
-and save it in the **app/data** folder.
+Click on the **Download** button and select the **Download dataset as zip** option. The file **archive.zip** is saved in the **Downloads** folder. Copy the file to the **app/data** folder.  
+
+Then you have to extract the file.  
 
 In your terminal type:
 
