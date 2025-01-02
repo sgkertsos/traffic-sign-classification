@@ -46,6 +46,10 @@ We use the **scikit-learn** python library to handle data splitting.
 ![image info](./images/tf.png)  
 We use the **tensorflow** library to perform the model training.
 
+#### AWS Elastic Kubernetes Service
+![image info](./images/EKS.png)  
+We use the AWS Elastic Kubernetes Service to build a Kubernetes cluster on the cloud and host our traffic sign classification service on this cluster.
+
 ### Application flow
 
 Below you can see the application flow diagram.  
@@ -342,7 +346,7 @@ kubectl get services
 **The newly created kubernetes cluster cannot be used for free and it is charged. So if you want to delete it you can type the following:**  
 
 ```console
-eksctl delete cluster --name tsc-eks
+eksctl delete cluster --name tsc-eks --disable-nodegroup-eviction
 ```
 
 ### Notes
