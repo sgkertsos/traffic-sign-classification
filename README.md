@@ -108,11 +108,13 @@ git clone https://github.com/sgkertsos/traffic-sign-classification.git
 ```
 
 #### Download the dataset
-Download the **archive.zip** file from the link below:
+Navigate to the link below:
 
 https://www.kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign
 
-and save it in the **app/data** folder.
+Click on the **Download** button and select the **Download dataset as zip** option. The file **archive.zip** is saved in the **Downloads** folder. Copy the file to the **app/data** folder.  
+
+Then you have to extract the file.  
 
 In your terminal type:
 
@@ -263,10 +265,11 @@ docker build -t serving-gateway -f Dockerfile.gateway .
 aws ecr create-repository --repository-name model-serving
 ```
 
-It returns the following:  
-**ACCOUNT**.dkr.ecr.**REGION**.amazonaws.com/model-serving
+It returns the following URI:  
 
-Where **ACCOUNT** is your ACCOUNT ID and **REGION** is your region.
+**ACCOUNT**.dkr.ecr.**REGION**.amazonaws.com/model-serving  
+
+Where **ACCOUNT** is your ACCOUNT ID and **REGION** is your region.  
 
 **In the instructions that follow you have to replace the ACCOUNT ID and the REGION with those two values.**
 
@@ -274,7 +277,8 @@ Where **ACCOUNT** is your ACCOUNT ID and **REGION** is your region.
 ```console
 aws ecr get-login-password --region <REGION> | docker login --username AWS --password-stdin <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com
 ```
-It must return  
+It must return:  
+
 Login Succeeded
 
 * Tag images. Type:
@@ -299,7 +303,9 @@ eksctl create cluster -f cluster.yaml
 aws eks --region <REGION> update-kubeconfig --name tsc-eks
 ```
 
-* Add **tf-serving** container to kubernetes cluster. Type:
+* Add **tf-serving** container to kubernetes cluster.  
+  Change **ACCOUNT ID** and **REGION** in the **tf-serving-traffic-sign-classification-deployment.yaml**. Then type:  
+  
 ```console
 kubectl apply -f tf-serving-traffic-sign-classification-deployment.yaml
 ```
@@ -309,7 +315,9 @@ kubectl apply -f tf-serving-traffic-sign-classification-deployment.yaml
 kubectl apply -f tf-serving-traffic-sign-classification-service.yaml
 ```
 
-* Add **serving-gateway** to kubernetes cluster. Type:
+* Add **serving-gateway** container to kubernetes cluster.  
+  Change **ACCOUNT ID** and **REGION** in the **serving-gateway-deployment.yaml**. Then type:
+  
 ```console
 kubectl apply -f serving-gateway-deployment.yaml
 ```
@@ -324,7 +332,11 @@ kubectl apply -f serving-gateway-service.yaml
 kubectl describe service serving-gateway
 ```
 we see the value in the LoadBalancer Ingress line, eg  
-a8890f67a9ca24353a8c8b53653d442e-140471327.us-east-1.elb.amazonaws.com
+
+aef4e0135fc674e079b622e215972265-452051357.us-east-1.elb.amazonaws.com
+
+**NOTE**  
+If you want the **streamlit** app access **your** cluster, you must update the **url** in the **predict_service_functions.py** file with this external URL and rebuild the **streamlit** container.  
 
 The kubernetes cluster is created. You can check it by typing the following commands:  
 
