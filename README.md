@@ -313,7 +313,7 @@ kubectl apply -f tf-serving-traffic-sign-classification-deployment.yaml
 kubectl apply -f tf-serving-traffic-sign-classification-service.yaml
 ```
 
-* Add **serving-gateway** to kubernetes cluster. Type:
+* Add **serving-gateway** container to kubernetes cluster. Type:
 ```console
 kubectl apply -f serving-gateway-deployment.yaml
 ```
@@ -328,7 +328,8 @@ kubectl apply -f serving-gateway-service.yaml
 kubectl describe service serving-gateway
 ```
 we see the value in the LoadBalancer Ingress line, eg  
-a8890f67a9ca24353a8c8b53653d442e-140471327.us-east-1.elb.amazonaws.com
+
+aef4e0135fc674e079b622e215972265-452051357.us-east-1.elb.amazonaws.com
 
 The kubernetes cluster is created. You can check it by typing the following commands:  
 
