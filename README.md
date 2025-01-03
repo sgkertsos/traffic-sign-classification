@@ -129,7 +129,7 @@ There are two possibilities here:
 
 * Use the already trained model **(traffic_sign_classification_model.h5)**
 
-  This model was trained with an accuracy of almost **99%**
+  This model was trained with an accuracy of almost **99%**.
   
   In **Dockerfile.gunicorn** comment out the following lines:
 
