@@ -79,7 +79,7 @@ The following folders/files are included in the application:
   * **app.py**. This is the application entry point. It is the file that is loaded when the UI container starts.
   * **predict_service_functions.py**. This file contains the necessary functions to connect to the traffic sign classification web service.
   * **requirements.gateway.txt**. All python libraries with their versions, used by the gateway container are stored here.
-  * **gateway.py**. This is the traffic sign classification web service. This service receives a traffic sign image in png/jpg format and returns a predicted traffic sign class.
+  * **gateway.py**. This is the gateway web service. This service receives a traffic sign image in png/jpg format. It contacts the tf serving container by using gRPC. A predicted traffic sign class is then returned to the user.
   * **.yaml** files. Those files are used by the kubectl utiltiy to create the kubernetes cluster components.
 * **convert_model.ipynb**. This file is used to convert the **.h5** format model to the **saved_model** format.
 * **notebook.ipynb** This is a Jupyter notebook file which was used for Exploratory Data Analysis. Also in this file the model used in the app was created and tested. Model creation is also performed in the **init.py** file mentioned earlier.
