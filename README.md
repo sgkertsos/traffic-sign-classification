@@ -199,7 +199,7 @@ Copy the URL that is shown in your terminal and paste it in your preferred brows
 Double click on the **notebook.ipynb** file. The file is opened in a different tab. In this file we do the following:
 
 * We perform Exploratory Data Analysis. 
-* We create and test a model.
+* We create a model. Then we train it and test it.
 
 Each notebook cell has a short description of what is actually done.
 
