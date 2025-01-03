@@ -32,7 +32,7 @@ Flask is the framework which we use to create the prediction web service.
 
 #### Streamlit
 ![image info](./images/streamlit.png)  
-Streamlit is used to create the user interface (UI). The user selects a traffic sign image file by using the **** button or by just dragging the file and the output is displayed.
+Streamlit is used to create the user interface (UI). The user selects a traffic sign image file by using the **Browse files** button or by just dragging the file and the output is displayed.
 
 #### Docker
 ![image info](./images/docker.png)  
@@ -56,7 +56,7 @@ Below you can see the application flow diagram.
 
 ![image info](./images/app_flow_diagram.png)  
 
-The user opens a r and accesses a simple form which is actually a streamlit app. All the user has to do is select the desired traffic sign image **(png/jpg)** by using the **Browse files** button or by just dragging the file. The streamlit app uses a function from the **predict_service_functions.py** file to connect to the web service **(predict_service.py)**. The connection is made by using the **/predict_traffic_sign** endpoint. The **predict** function uses the model **(traffic_sign_classification_model.h5)** to predict a traffic sign class. The traffic sign class with a short description is then returned to the user and displayed below the image selection box. The **init.py** script runs when the application starts. You can read more about this script in the **Run the application** section.
+The user opens a browser and accesses a simple form which is actually a streamlit app. All the user has to do is select the desired traffic sign image **(png/jpg)** by using the **Browse files** button or by just dragging the file. The streamlit app uses a function from the **predict_service_functions.py** file to connect to the web service **(predict_service.py)**. The connection is made by using the **/predict_traffic_sign** endpoint. The **predict** function uses the model **(traffic_sign_classification_model.h5)** to predict a traffic sign class. The traffic sign class with a short description is then returned to the user and displayed below the image selection box. The **init.py** script runs when the application starts. You can read more about this script in the **Run the application** section.
 
 ### Application structure
 
@@ -78,9 +78,9 @@ The following folders/files are included in the application:
   * **requirements.streamlit.txt**. All python libraries with their versions, used by the UI container are stored here.
   * **app.py**. This is the application entry point. It is the file that is loaded when the UI container starts.
   * **predict_service_functions.py**. This file contains the necessary functions to connect to the traffic sign classification web service.
-  * **requirements.gateway.txt**. All python libraries with their versions, used by the classification service container are stored here.
-  * **gateway.py**. This is the traffic sign classification web service. This service receives a traffic sign image in png/jpg format and returns a predicted traffic sign class.
-  * **.yaml** files. Thos files are used by the kubectl utiltiy to create the kubernetes cluster components.
+  * **requirements.gateway.txt**. All python libraries with their versions, used by the gateway container are stored here.
+  * **gateway.py**. This is the gateway web service. This service receives a traffic sign image in png/jpg format. It contacts the tf serving container by using gRPC. A predicted traffic sign class is then returned to the user.
+  * **.yaml** files. Those files are used by the kubectl utiltiy to create the kubernetes cluster components.
 * **convert_model.ipynb**. This file is used to convert the **.h5** format model to the **saved_model** format.
 * **notebook.ipynb** This is a Jupyter notebook file which was used for Exploratory Data Analysis. Also in this file the model used in the app was created and tested. Model creation is also performed in the **init.py** file mentioned earlier.
 * **README.md**. This file.
@@ -127,16 +127,19 @@ unzip archive.zip
 
 There are two possibilities here:
 
-* Use the already trained model **(traffic_sign_classification_mode.h5)**  
+* Use the already trained model **(traffic_sign_classification_model.h5)**
+
+  This model was trained with an accuracy of almost **99%**.
+  
   In **Dockerfile.gunicorn** comment out the following lines:
 
   ![image info](./images/comment_out_data.png)
 
   **NOTE**
-  This is the selected method to run the application because it saves you time, training the model.
+  This is the selected method to run the application. It saves you time because you don't have to train the model yourself.
   
 * Train the model again. The training may take some time.
-  In **Dockerfile.gunicorn** comment out the following line:
+  In **Dockerfile.gunicorn** uncomment the lines mentioned in the previous step and comment out the following line:
   
   ![image info](./images/comment_out_model.png)  
 
@@ -164,7 +167,7 @@ When the Gunicorn docker container starts for the first time, the **init.py** sc
 This model is then loaded by the traffic sign classification web service to classify traffic signs. 
 
 **Note**  
-The script checks if the model file **(traffic_sign_classification_model.h5)** file exists. If the file exists, the script will not perform the initialization process again.
+The script checks if the model file **(traffic_sign_classification_model.h5)** exists. If the file exists, the script will not perform the initialization process again.
 
 ### Access the user interface
 Open your preferred browser and navigate to the following address:
@@ -196,7 +199,7 @@ Copy the URL that is shown in your terminal and paste it in your preferred brows
 Double click on the **notebook.ipynb** file. The file is opened in a different tab. In this file we do the following:
 
 * We perform Exploratory Data Analysis. 
-* We create and test a model.
+* We create a model. Then we train it and test it.
 
 Each notebook cell has a short description of what is actually done.
 
