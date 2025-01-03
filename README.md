@@ -127,7 +127,10 @@ unzip archive.zip
 
 There are two possibilities here:
 
-* Use the already trained model **(traffic_sign_classification_model.h5)**  
+* Use the already trained model **(traffic_sign_classification_model.h5)**
+
+  This model was trained with an accuracy of almost **99%**
+  
   In **Dockerfile.gunicorn** comment out the following lines:
 
   ![image info](./images/comment_out_data.png)
@@ -164,7 +167,7 @@ When the Gunicorn docker container starts for the first time, the **init.py** sc
 This model is then loaded by the traffic sign classification web service to classify traffic signs. 
 
 **Note**  
-The script checks if the model file **(traffic_sign_classification_model.h5)** file exists. If the file exists, the script will not perform the initialization process again.
+The script checks if the model file **(traffic_sign_classification_model.h5)** exists. If the file exists, the script will not perform the initialization process again.
 
 ### Access the user interface
 Open your preferred browser and navigate to the following address:
