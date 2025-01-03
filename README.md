@@ -133,7 +133,7 @@ There are two possibilities here:
   ![image info](./images/comment_out_data.png)
 
   **NOTE**
-  This is the selected method to run the application because it saves you time, training the model.
+  This is the selected method to run the application. It saves you time because you don't have to train the model yourself.
   
 * Train the model again. The training may take some time.
   In **Dockerfile.gunicorn** comment out the following line:
