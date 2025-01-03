@@ -32,7 +32,7 @@ Flask is the framework which we use to create the prediction web service.
 
 #### Streamlit
 ![image info](./images/streamlit.png)  
-Streamlit is used to create the user interface (UI). The user selects a traffic sign image file by using the **** button or by just dragging the file and the output is displayed.
+Streamlit is used to create the user interface (UI). The user selects a traffic sign image file by using the **Browse files** button or by just dragging the file and the output is displayed.
 
 #### Docker
 ![image info](./images/docker.png)  
