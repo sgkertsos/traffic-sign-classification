@@ -81,8 +81,12 @@ The following folders/files are included in the application:
   * **requirements.gateway.txt**. All python libraries with their versions, used by the gateway container are stored here.
   * **gateway.py**. This is the gateway web service. This service receives a traffic sign image in png/jpg format. It contacts the tf serving container by using gRPC. A predicted traffic sign class is then returned to the user.
   * **.yaml** files. Those files are used by the kubectl utiltiy to create the kubernetes cluster components.
-* **convert_model.ipynb**. This file is used to convert the **.h5** format model to the **saved_model** format.
-* **notebook.ipynb** This is a Jupyter notebook file which was used for Exploratory Data Analysis. Also in this file the model used in the app was created and tested. Model creation is also performed in the **init.py** file mentioned earlier.
+* **others** folder. This folder contains files for model evaluation, EDA, and model conversion.
+  * **eda.ipynb**. This file used for Exploratory Data Analysis.
+  * **convert_model.ipynb**. This file is used to convert the **.h5** format model to the **saved_model** format.
+  * **custom.ipynb**. This is a Jupyter notebook file which was used for custom model evaluation. Model creation is also performed in the **init.py** file mentioned earlier.
+  * **resbet50.ipynb**. This is a Jupyter Notebook file which was used for resnet50 model evaluation.
+  * **requirements.txt**. This file contains all the requirements for performing the models evaluation and the model conversion.
 * **README.md**. This file.
 
 ### Install Jupyter Notebook and Docker
@@ -184,10 +188,42 @@ The traffic sign class index and description appear below the gray area.
 
 ![image info](./images/app_classification_made.png)  
 
-### Run notebook.ipynb Jupyter Notebook
-If you want to check how the model was created and tested, you can do it by opening the **notebook.ipynb** file in Jupyter Notebook and execute the code in each cell.
+### Perform EDA, model evaluation and model conversion
+In this section you can do the following:  
 
-To start Jupyter Notebook make sure that you are in the **traffic-sign-classification** folder and then type the following in your terminal:
+* Check the Exploratory Data Analysis file (**eda.ipynb**)
+* Check the model evaluation files (**custom.ipynb** and **resnet50.ipynb**)
+* Convert the model from the **.h5** format to the **saved_model** format by using the **convert_model.ipynb** file.
+
+To run the code in these files do the following:  
+
+Make sure that you are in the **traffic-sign-classification** folder. Then type the following in your terminal:  
+
+```console
+python3.10 -m venv py-venv
+```
+
+```console
+source py-venv/bin/activate
+```
+
+```console
+pip install ipykernel
+```
+
+```console
+python -m ipykernel install --user --name=py-venv
+```
+
+```console
+pip install -r requirements.txt
+```
+
+```console
+pip install jupyter
+```
+
+Then navigate to the **others** folder and type the following:  
 
 ```console
 jupyter notebook
