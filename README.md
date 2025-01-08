@@ -81,8 +81,11 @@ The following folders/files are included in the application:
   * **requirements.gateway.txt**. All python libraries with their versions, used by the gateway container are stored here.
   * **gateway.py**. This is the gateway web service. This service receives a traffic sign image in png/jpg format. It contacts the tf serving container by using gRPC. A predicted traffic sign class is then returned to the user.
   * **.yaml** files. Those files are used by the kubectl utiltiy to create the kubernetes cluster components.
-* **convert_model.ipynb**. This file is used to convert the **.h5** format model to the **saved_model** format.
-* **notebook.ipynb** This is a Jupyter notebook file which was used for Exploratory Data Analysis. Also in this file the model used in the app was created and tested. Model creation is also performed in the **init.py** file mentioned earlier.
+* **others** folder. This folder contains files for model evaluation, EDA, and model conversion.
+  * **convert_model.ipynb**. This file is used to convert the **.h5** format model to the **saved_model** format.
+  * **custom.ipynb**. This is a Jupyter notebook file which was used for custom model evaluation. Model creation is also performed in the **init.py** file mentioned earlier.
+  * **resbet50.ipynb**. This is a Jupyter Notebook file which was used for resnet50 model evaluation.
+  * **requirements.txt**. This file contains all the requirements for performing the models evaluation and the model conversion.
 * **README.md**. This file.
 
 ### Install Jupyter Notebook and Docker
