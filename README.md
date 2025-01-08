@@ -89,14 +89,7 @@ The following folders/files are included in the application:
   * **requirements.txt**. This file contains all the requirements for performing the models evaluation and the model conversion.
 * **README.md**. This file.
 
-### Install Jupyter Notebook and Docker
-
-#### Install Jupyter Notebook
-To install Jupyter Notebook you can use the following link:
-
-https://docs.jupyter.org/en/latest/install/notebook-classic.html
-
-#### Install Docker and Docker Compose 
+### Install Docker and Docker Compose 
 To install Docker and Docker Compose you can use the following links:
 
 https://docs.docker.com/engine/install/  
@@ -238,6 +231,11 @@ Double click on the **notebook.ipynb** file. The file is opened in a different t
 * We create a model. Then we train it and test it.
 
 Each notebook cell has a short description of what is actually done.
+
+**NOTE**
+You can also install Jupyter Notebook by following the instructions in the following link:  
+
+https://docs.jupyter.org/en/latest/install/notebook-classic.html
 
 ### AWS Elastic Kubernetes Service
 A Kubernetes cluster with this traffic sign classification service runs on AWS. You can access it by doing the following:
