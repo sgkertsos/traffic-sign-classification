@@ -225,12 +225,9 @@ Copy the URL that is shown in your terminal and paste it in your preferred brows
 
 ![image info](./images/jupyter.png)  
 
-Double click on the **notebook.ipynb** file. The file is opened in a different tab. In this file we do the following:
+Double click on the desired file. The file is opened in a different tab. 
 
-* We perform Exploratory Data Analysis. 
-* We create a model. Then we train it and test it.
-
-Each notebook cell has a short description of what is actually done.
+Now you can run the code in each cell.  
 
 **NOTE**
 You can also install Jupyter Notebook by following the instructions in the following link:  
