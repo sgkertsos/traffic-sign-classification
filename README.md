@@ -221,7 +221,7 @@ Then navigate to the **others** folder and type the following:
 ```console
 jupyter notebook
 ```
-Copy the URL that is shown in your terminal and paste it in your preferred browser. The following picture appears. 
+Copy the URL that is shown in your terminal and paste it in your preferred browser. The following picture appears:  
 
 ![image info](./images/jupyter.png)  
 
