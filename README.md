@@ -230,7 +230,7 @@ Your browser is opened and the following picture appears:
 **NOTE**  
 If your browser is not automatically opened, copy the URL that is shown in your terminal and paste it in your preferred browser. 
 
-Double click on the desired file. The file is opened in a different tab. 
+Click on the desired file. The file is opened in a different tab. 
 
 Now you can run the code in each cell.  
 
