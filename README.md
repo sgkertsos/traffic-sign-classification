@@ -1,4 +1,3 @@
-$${\color{red}Red}$$
 ### Description
 This is the capstone project for the DataTalks Club ML Zoomcamp 2024.
 
@@ -184,7 +183,7 @@ The traffic sign class index and description appear below the gray area.
 
 ### Perform EDA, model evaluation and model conversion
 
-<p style="color:red">Two different models were trained and evaluated. One custom model and the resnet50 model. The custom model evaluation gave a better valuation accuracy score so this model is used in the application.</p>  
+$${\color{red}Two different models were trained and evaluated. One custom model and the resnet50 model. The custom model evaluation gave a better valuation accuracy score so this model is used in the application.}$$
 
 In this section you can do the following:  
 
