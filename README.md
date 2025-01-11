@@ -234,7 +234,7 @@ Double click on the desired file. The file is opened in a different tab.
 
 Now you can run the code in each cell.  
 
-**NOTE**
+**NOTE**  
 You can also install Jupyter Notebook by following the instructions in the following link:  
 
 https://docs.jupyter.org/en/latest/install/notebook-classic.html
