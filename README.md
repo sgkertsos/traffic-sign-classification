@@ -1,3 +1,4 @@
+$${\color{red}Red}$$
 ### Description
 This is the capstone project for the DataTalks Club ML Zoomcamp 2024.
 
