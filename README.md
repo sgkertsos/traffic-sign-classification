@@ -223,9 +223,12 @@ pip install jupyter
 ```console
 jupyter notebook
 ```
-Copy the URL that is shown in your terminal and paste it in your preferred browser. The following picture appears:  
+Your browser is opened and the following picture appears:   
 
 ![image info](./images/jupyter.png)  
+
+**NOTE**  
+If your browser is not automatically opened, copy the URL that is shown in your terminal and paste it in your preferred browser. 
 
 Double click on the desired file. The file is opened in a different tab. 
 
