@@ -85,7 +85,7 @@ The following folders/files are included in the application:
   * **eda.ipynb**. This file used for Exploratory Data Analysis.
   * **convert_model.ipynb**. This file is used to convert the **.h5** format model to the **saved_model** format.
   * **custom.ipynb**. This is a Jupyter notebook file which was used for custom model evaluation. Model creation is also performed in the **init.py** file mentioned earlier.
-  * **resbet50.ipynb**. This is a Jupyter Notebook file which was used for resnet50 model evaluation.
+  * **resnet50.ipynb**. This is a Jupyter Notebook file which was used for resnet50 model evaluation.
   * **requirements.txt**. This file contains all the requirements for performing the models evaluation and the model conversion.
 * **README.md**. This file.
 
