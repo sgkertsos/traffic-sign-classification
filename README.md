@@ -209,14 +209,16 @@ python -m ipykernel install --user --name=py-venv
 ```
 
 ```console
+cd others
+```
+
+```console
 pip install -r requirements.txt
 ```
 
 ```console
 pip install jupyter
 ```
-
-Then navigate to the **others** folder and type the following:  
 
 ```console
 jupyter notebook
