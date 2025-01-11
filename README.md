@@ -190,7 +190,15 @@ In this section you can do the following:
 
 To run the code in these files do the following:  
 
-Make sure that you are in the **traffic-sign-classification** folder. Then type the following in your terminal:  
+Install **Python 3.10** if it is not installed by typing the following:
+
+```console
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.10 python3.10-venv
+```
+
+Make sure that you are in the **traffic-sign-classification** folder and that also you have downloaded and extracted the dataset in the **app/data** folder as described earlier. Then type the following in your terminal:  
 
 ```console
 python3.10 -m venv py-venv
@@ -209,6 +217,10 @@ python -m ipykernel install --user --name=py-venv
 ```
 
 ```console
+cd others
+```
+
+```console
 pip install -r requirements.txt
 ```
 
@@ -216,23 +228,21 @@ pip install -r requirements.txt
 pip install jupyter
 ```
 
-Then navigate to the **others** folder and type the following:  
-
 ```console
 jupyter notebook
 ```
-Copy the URL that is shown in your terminal and paste it in your preferred browser. The following picture appears. 
+Your browser is opened and the following picture appears:   
 
 ![image info](./images/jupyter.png)  
 
-Double click on the **notebook.ipynb** file. The file is opened in a different tab. In this file we do the following:
+**NOTE**  
+If your browser is not automatically opened, copy the URL that is shown in your terminal and paste it in your preferred browser. 
 
-* We perform Exploratory Data Analysis. 
-* We create a model. Then we train it and test it.
+Click on the desired file. The file is opened in a different tab. 
 
-Each notebook cell has a short description of what is actually done.
+Now you can run the code in each cell.  
 
-**NOTE**
+**NOTE**  
 You can also install Jupyter Notebook by following the instructions in the following link:  
 
 https://docs.jupyter.org/en/latest/install/notebook-classic.html
