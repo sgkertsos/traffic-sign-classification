@@ -182,6 +182,9 @@ The traffic sign class index and description appear below the gray area.
 ![image info](./images/app_classification_made.png)  
 
 ### Perform EDA, model evaluation and model conversion
+
+<span style="color:red">Two different models were trained and evaluated. One custom model and the resnet50 model. The custom model evaluation gave a better valuation accuracy score so this model is used in the application.</span>  
+
 In this section you can do the following:  
 
 * Check the Exploratory Data Analysis file (**eda.ipynb**)
