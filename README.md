@@ -185,7 +185,7 @@ The traffic sign class index and description appear below the gray area.
 
 $${\color{red}Two \space different \space models \space were \space trained \space and \space evaluated. \space One \space custom \space model \space and \space the \space resnet50 \space model.}$$
 
-$${\color{red}The \space custom \space model \space evaluation \space gave \space a \space better \space valuation \space accuracy \space score \space so \space this \space model \space is \space used \space in \space the \space application.}$$
+$${\color{red}The \space custom \space model \space evaluation \space gave \space a \space better \space validation \space accuracy \space score, \space so \space this \space model \space is \space used \space in \space the \space application.}$$
 
 In this section you can do the following:  
 
