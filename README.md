@@ -190,6 +190,14 @@ In this section you can do the following:
 
 To run the code in these files do the following:  
 
+Install **Python 3.10** if it is not installed by typing the following:
+
+```console
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.10 python3.10-venv
+```
+
 Make sure that you are in the **traffic-sign-classification** folder and that also you have downloaded and extracted the dataset in the **app/data** folder as described earlier. Then type the following in your terminal:  
 
 ```console
