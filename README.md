@@ -183,7 +183,7 @@ The traffic sign class index and description appear below the gray area.
 
 ### Perform EDA, model evaluation and model conversion
 
-$${\color{red}Two \space different \space models were trained and evaluated. One custom model and the resnet50 model. The custom model evaluation gave a better valuation accuracy score so this model is used in the application.}$$
+$${\color{red}Two \space different \space models \space were \space trained \space and \space evaluated. \space One \space custom \space model \space and \space the \space resnet50 \space model. \space The \space custom \space model \space evaluation \space gave \space a \space better \space valuation \space accuracy \space score \space so \space this \space model \space is \space used \space in \space the \space application.}$$
 
 In this section you can do the following:  
 
