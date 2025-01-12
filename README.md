@@ -282,15 +282,15 @@ traffic sign classification service.
 
 * An AWS account
 
-* Install AWS CLI
+* Install AWS CLI  
 You can see how to install AWS CLI in the following link:  
 https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html  
 
-* Install kubectl and eksctl
-You can see how to install kubectl and eksctl in the following link
-https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+* Install kubectl and eksctl  
+You can see how to install kubectl and eksctl in the following link  
+https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html  
 
-Open your terminal and access the **eks** folder.
+Open your terminal and access the **eks** folder.  
 
 Follow the next steps one by one:  
 
@@ -339,12 +339,18 @@ Login Succeeded
 * Tag images. Type:
 ```console
 docker tag serving-gateway <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:serving-gateway
+```
+
+```console
 docker tag tf-serving-traffic-sign-classification-model <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:tf-serving-traffic-sign-classification-model
 ```
 
 * Push images to ECR. Type:
 ```console
 docker push <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:serving-gateway
+```
+
+```console
 docker push <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:tf-serving-traffic-sign-classification-model
 ```
 
@@ -391,7 +397,7 @@ we see the value in the LoadBalancer Ingress line, eg
 aef4e0135fc674e079b622e215972265-452051357.us-east-1.elb.amazonaws.com
 
 **NOTE**  
-If you want the **streamlit** app access **your** cluster, you must update the **url** in the **predict_service_functions.py** file with this external URL and rebuild the **streamlit** container.  
+If you want the **streamlit** app access **your** cluster, you must update the **url** **(do not forget to add the /predict_traffic_sign endpoint to the end)** in the **predict_service_functions.py** file with this external URL and rebuild the **streamlit** container.  
 
 The kubernetes cluster is created. You can check it by typing the following commands:  
 
