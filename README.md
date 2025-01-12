@@ -397,7 +397,7 @@ we see the value in the LoadBalancer Ingress line, eg
 aef4e0135fc674e079b622e215972265-452051357.us-east-1.elb.amazonaws.com
 
 **NOTE**  
-If you want the **streamlit** app access **your** cluster, you must update the **url** in the **predict_service_functions.py** file with this external URL and rebuild the **streamlit** container.  
+If you want the **streamlit** app access **your** cluster, you must update the **url** **(do not forget to add the /predict_traffic_sign endpoint to the end)** in the **predict_service_functions.py** file with this external URL and rebuild the **streamlit** container.  
 
 The kubernetes cluster is created. You can check it by typing the following commands:  
 
