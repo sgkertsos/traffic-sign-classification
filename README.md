@@ -282,15 +282,15 @@ traffic sign classification service.
 
 * An AWS account
 
-* Install AWS CLI
+* Install AWS CLI  
 You can see how to install AWS CLI in the following link:  
 https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html  
 
-* Install kubectl and eksctl
-You can see how to install kubectl and eksctl in the following link
-https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+* Install kubectl and eksctl  
+You can see how to install kubectl and eksctl in the following link  
+https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html  
 
-Open your terminal and access the **eks** folder.
+Open your terminal and access the **eks** folder.  
 
 Follow the next steps one by one:  
 
