@@ -13,7 +13,7 @@ classes = 43
 
 # This function creates a model
 
-def create_model(input_shape=(32, 32, 3), learning_rate=0.0):
+def create_model(input_shape=(32, 32, 3), learning_rate=0.0001):
     model = models.Sequential([
         # Input layer
         layers.Input(shape=input_shape),
@@ -47,7 +47,7 @@ def create_model(input_shape=(32, 32, 3), learning_rate=0.0):
     ])
 
     # Optimizer
-    optimizer = keras.optimizers.Adam()
+    optimizer = keras.optimizers.Adam(learning_rate)
     
     # Loss
     loss = keras.losses.CategoricalCrossentropy()
@@ -125,7 +125,7 @@ def train_model():
     y_val = to_categorical(y_val)
 
     # Create model
-    model = create_model(input_shape=(32, 32, 3), learning_rate=0.0)
+    model = create_model(input_shape=(32, 32, 3), learning_rate=0.0001)
 
     # Create a checkpoint to be used while training
     checkpoint_filepath = './model/traffic_sign_classification_model.h5'
@@ -137,7 +137,7 @@ def train_model():
     )
 
     # Train model
-    model.fit(X_train, y_train, epochs=35, validation_data=(X_val, y_val), callbacks=[checkpoint])
+    model.fit(X_train, y_train, epochs=10, validation_data=(X_val, y_val), callbacks=[checkpoint])
 
 # This is the initialization function
 
