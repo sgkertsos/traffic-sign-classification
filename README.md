@@ -20,7 +20,7 @@ The two folders we are interested in, are:
 
 #### Jupyter notebook
 ![image info](./images/Jupyter_logo.png)  
-Jupyter notebook is used run the **notebook.ipynb** file. We use this file for **Exploratory Data Analysis** and also for model evaluation and model selection.
+Jupyter notebook is used run the **.ipynb** files stored in the **others** folder. More on how to run these files can be found in a later section.
 
 #### Gunicorn
 ![image info](./images/gunicorn.png)  
@@ -85,7 +85,7 @@ The following folders/files are included in the application:
   * **eda.ipynb**. This file used for Exploratory Data Analysis.
   * **convert_model.ipynb**. This file is used to convert the **.h5** format model to the **saved_model** format.
   * **custom.ipynb**. This is a Jupyter notebook file which was used for custom model evaluation. Model creation is also performed in the **init.py** file mentioned earlier.
-  * **resbet50.ipynb**. This is a Jupyter Notebook file which was used for resnet50 model evaluation.
+  * **resnet50.ipynb**. This is a Jupyter Notebook file which was used for resnet50 model evaluation.
   * **requirements.txt**. This file contains all the requirements for performing the models evaluation and the model conversion.
 * **README.md**. This file.
 
@@ -158,12 +158,12 @@ When the Gunicorn docker container starts for the first time, the **init.py** sc
 * Images are loaded
 * Images are resized to 32x32 pixels and stored in the **app/data/train-r** folder.
 * Dataset is split into train and validation data
-* A model with specific parameters is trained. The specific model and the specific parameters were selected after model evaluation was performed by using the **notebook.ipynb** Jupyter Notebook file.
+* A model with specific parameters is trained. The specific model and the specific parameters were selected after model evaluation was performed by using the **custom.ipynb** Jupyter Notebook file stored in the **others** folder.
 * The model is saved under the filename **traffic_sign_classification_model.h5** in the **app/model** folder.
 
 This model is then loaded by the traffic sign classification web service to classify traffic signs. 
 
-**Note**  
+**NOTE**  
 The script checks if the model file **(traffic_sign_classification_model.h5)** exists. If the file exists, the script will not perform the initialization process again.
 
 ### Access the user interface
@@ -181,7 +181,15 @@ The traffic sign class index and description appear below the gray area.
 
 ![image info](./images/app_classification_made.png)  
 
+**NOTE**  
+For testing you can use traffic sign images stored in the **Test** folder located in the **app/data** folder.  
+
 ### Perform EDA, model evaluation and model conversion
+
+$${\color{red}Two \space different \space models \space were \space trained \space and \space evaluated. \space One \space custom \space model \space and \space the \space resnet50 \space model.}$$
+
+$${\color{red}The \space custom \space model \space evaluation \space gave \space a \space better \space validation \space accuracy \space score, \space so \space this \space model \space is \space used \space in \space the \space application.}$$
+
 In this section you can do the following:  
 
 * Check the Exploratory Data Analysis file (**eda.ipynb**)
