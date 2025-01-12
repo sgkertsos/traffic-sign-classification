@@ -158,7 +158,7 @@ When the Gunicorn docker container starts for the first time, the **init.py** sc
 * Images are loaded
 * Images are resized to 32x32 pixels and stored in the **app/data/train-r** folder.
 * Dataset is split into train and validation data
-* A model with specific parameters is trained. The specific model and the specific parameters were selected after model evaluation was performed by using the **notebook.ipynb** Jupyter Notebook file.
+* A model with specific parameters is trained. The specific model and the specific parameters were selected after model evaluation was performed by using the **custom.ipynb** Jupyter Notebook file stored in the **others** folder.
 * The model is saved under the filename **traffic_sign_classification_model.h5** in the **app/model** folder.
 
 This model is then loaded by the traffic sign classification web service to classify traffic signs. 
