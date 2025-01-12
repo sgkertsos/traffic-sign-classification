@@ -6,6 +6,6 @@ metadata:
   region: us-east-1
 
 nodeGroups:
-  - name: ng-m5-xlarge
-    instanceType: m5.xlarge
+  - name: ng-m5-large
+    instanceType: m5.large
     desiredCapacity: 1
