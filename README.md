@@ -339,12 +339,18 @@ Login Succeeded
 * Tag images. Type:
 ```console
 docker tag serving-gateway <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:serving-gateway
+```
+
+```console
 docker tag tf-serving-traffic-sign-classification-model <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:tf-serving-traffic-sign-classification-model
 ```
 
 * Push images to ECR. Type:
 ```console
 docker push <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:serving-gateway
+```
+
+```console
 docker push <ACCOUNT ID>.dkr.ecr.<REGION>.amazonaws.com/model-serving:tf-serving-traffic-sign-classification-model
 ```
 
