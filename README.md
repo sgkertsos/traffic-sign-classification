@@ -163,7 +163,7 @@ When the Gunicorn docker container starts for the first time, the **init.py** sc
 
 This model is then loaded by the traffic sign classification web service to classify traffic signs. 
 
-**Note**  
+**NOTE**  
 The script checks if the model file **(traffic_sign_classification_model.h5)** exists. If the file exists, the script will not perform the initialization process again.
 
 ### Access the user interface
