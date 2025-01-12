@@ -181,7 +181,7 @@ The traffic sign class index and description appear below the gray area.
 
 ![image info](./images/app_classification_made.png)  
 
-**NOTE**
+**NOTE**  
 For testing you can use traffic sign images stored in the **Test** folder located in the **app/data** folder.  
 
 ### Perform EDA, model evaluation and model conversion
