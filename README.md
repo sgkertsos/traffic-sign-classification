@@ -20,7 +20,7 @@ The two folders we are interested in, are:
 
 #### Jupyter notebook
 ![image info](./images/Jupyter_logo.png)  
-Jupyter notebook is used run the **notebook.ipynb** file. We use this file for **Exploratory Data Analysis** and also for model evaluation and model selection.
+Jupyter notebook is used run the **.ipynb** files stored in the **others** folder. More on how to run these files can be found in a later section.
 
 #### Gunicorn
 ![image info](./images/gunicorn.png)  
