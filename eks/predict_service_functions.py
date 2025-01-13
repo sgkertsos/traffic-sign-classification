@@ -8,7 +8,7 @@ from PIL import Image
 def predict_traffic_sign(image):
 
     # The host where the gateway resides
-    url = ''
+    url = 'http://af54604961372414aa1d204878e1e7f4-361944805.us-east-1.elb.amazonaws.com/predict_traffic_sign'
 
     # Load image
     img = Image.open(image)
